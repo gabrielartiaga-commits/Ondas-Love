@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulador de Ondas Love</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="floating-formulas" aria-hidden="true">
+  <span class="formula f1">u = A·sin(kx − ωt)</span>
+  <span class="formula f2">v = λ·f</span>
+  <span class="formula f3">k = 2π/λ</span>
+  <span class="formula f4">ω = 2πf</span>
+  <span class="formula f5">T = 1/f</span>
+  <span class="formula f6">β₁ &lt; c<sub>L</sub> &lt; β₂</span>
+  <span class="formula f7">τ = G·γ</span>
+</div>
+
+<header class="main-header glass">
+  <h1 class="project-title">Simulador de Ondas Love 🌊</h1>
+  <p class="project-subtitle">Ondas superficiales y movimiento de corte horizontal</p>
+  <div class="team-badges">
+    <span class="badge">Feria de la Ciencia · Física</span>
+    <span class="badge atomic-badge">Modo Atom Eve 🔬</span>
+    <span class="badge">Grado 11-1</span>
+  </div>
+</header>
+
+<main class="dashboard">
+  <section class="viz-panel glass">
+    <div class="panel-header">
+      <h2>Visualización en tiempo real</h2>
+      <div class="mode-tabs">
+        <button class="tab-btn active" data-mode="wave">Onda teórica</button>
+        <button class="tab-btn" data-mode="carpet">Alfombra sísmica</button>
+      </div>
+    </div>
+    <div class="canvas-container" id="stage">
+      <canvas id="sim"></canvas>
+      <div class="canvas-overlay" id="quake-alert">SIMULANDO TERREMOTO</div>
+      <div class="canvas-hint" id="hint"></div>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><i class="box foam-box"></i>Suelo / espuma</span>
+      <span class="legend-item"><i class="box wave-box"></i>Frente de onda</span>
+      <span class="legend-item"><i class="box block-box"></i>Estructuras</span>
+    </div>
+  </section>
+
+  <aside class="controls-panel glass">
+    <h3>Parámetros de la onda</h3>
+    <div class="slider-wrap"><label>Amplitud (A) <span id="val-amp">50 px</span></label><input type="range" id="amp" min="10" max="100" value="50"></div>
+    <div class="slider-wrap"><label>Frecuencia (f) <span id="val-freq">2.0 Hz</span></label><input type="range" id="freq" min="0.5" max="5" step="0.1" value="2"></div>
+    <div class="slider-wrap"><label>Velocidad (v) <span id="val-vel">3.0 m/s</span></label><input type="range" id="vel" min="1" max="10" step="0.5" value="3"></div>
+    <div class="slider-wrap"><label>Estructuras <span id="val-blocks">8</span></label><input type="range" id="blocks" min="3" max="15" value="8"></div>
+
+    <div class="action-buttons">
+      <button id="btn-build" class="btn-glossy primary" aria-pressed="false">Modo construcción 🏢</button>
+      <button id="btn-quake" class="btn-glossy danger">Generar terremoto 💥</button>
+      <button id="btn-isolator" class="btn-glossy success" aria-pressed="false">Aisladores de base 🧱</button>
+      <button id="btn-reset" class="btn-glossy neutral">Reiniciar</button>
+    </div>
+
+    <h3>Datos físicos en vivo</h3>
+    <div class="data-grid">
+      <div class="data-item"><span class="label">Longitud (λ)</span><span class="value" id="d-lambda">--</span></div>
+      <div class="data-item"><span class="label">Periodo (T)</span><span class="value" id="d-period">--</span></div>
+      <div class="data-item"><span class="label">N.º de onda (k)</span><span class="value" id="d-k">--</span></div>
+      <div class="data-item"><span class="label">Frec. angular (ω)</span><span class="value" id="d-w">--</span></div>
+      <div class="data-item"><span class="label">Deriva máx.</span><span class="value" id="d-drift">--</span></div>
+      <div class="data-item"><span class="label">Edificios en pie</span><span class="value" id="d-alive">--</span></div>
+    </div>
+  </aside>
+</main>
+
+<section class="info-section">
+  <article class="info-card glass"><h3>¿Qué son las ondas Love?</h3><p>Ondas sísmicas superficiales cuyas partículas se mueven solo en horizontal y perpendicular a la dirección de propagación. No producen movimiento vertical: generan un fuerte esfuerzo de corte.</p></article>
+  <article class="info-card glass"><h3>¿Por qué son peligrosas?</h3><p>El vaivén lateral hace oscilar los edificios. Si no fueron diseñados para resistirlo, se agrietan o colapsan; por eso son una causa principal de daño estructural.</p></article>
+  <article class="info-card glass"><h3>El experimento: alfombra sísmica</h3><p>La espuma densa representa el suelo y los bloques de madera, los edificios. Al mover la espuma lateralmente se evidencia el desplazamiento de corte característico.</p></article>
+  <article class="info-card glass scientist-card">
+    <div class="scientist-img-wrap tilt-container"><img src="https://i.postimg.cc/VLbB4z1Q/IMG-20260927190020801.jpg" alt="Augustus E.H. Love" class="tilt-img"></div>
+    <h3>Augustus E.H. Love</h3>
+    <p>Matemático y geofísico británico que explicó matemáticamente este movimiento en 1911. Sus estudios sobre elasticidad son fundamentales para la ingeniería antisísmica.</p>
+  </article>
+</section>
+
+<section class="gallery-section glass">
+  <h3>Galería interactiva</h3>
+  <div class="gallery-grid">
+    <figure class="gallery-item tilt-container"><img src="https://i.postimg.cc/tCVtD9bf/IMG-20260927185855235.jpg" alt="Onda Love con bloques" class="tilt-img"><figcaption class="img-overlay">Desplazamiento lateral</figcaption></figure>
+    <figure class="gallery-item tilt-container"><img src="https://i.postimg.cc/j2B6KFH1/IMG-20260927185826425.jpg" alt="Diagrama 3D de ejes" class="tilt-img"><figcaption class="img-overlay">Ejes X, Y, Z</figcaption></figure>
+  </div>
+</section>
+
+<footer class="main-footer glass">
+  <h3>Equipo de investigación</h3>
+  <div class="team-photo-wrap tilt-container"><img src="https://i.postimg.cc/NfMfw0FW/IMG-20260917-WA0005(1).jpg" alt="Equipo creador" class="tilt-img"></div>
+  <div class="team-names">
+    <div class="member-card glass">Gabriel Arteaga</div>
+    <div class="member-card glass">Erika Nicolle Mora Colmenares</div>
+    <div class="member-card glass">Kevin Rodriguez</div>
+  </div>
+  <p class="grade-badge">Grado 11-1 | Feria de la Ciencia · Física</p>
+  <a class="official-link" href="https://www.usgs.gov/programs/earthquake-hazards/science/earthquake-science" target="_blank" rel="noopener">Visitar sitio oficial USGS sobre ondas sísmicas</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
